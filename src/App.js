@@ -6,22 +6,76 @@ import TransactionsPage from "./pages/TransactionsPage";
 import EvaluationPage from "./pages/EvaluationPage";
 import ResultsPage from "./pages/ResultsPage";
 
+const linkBaseStyle = {
+  padding: "10px 22px",
+  margin: "0 4px",
+  borderRadius: 8,
+  color: "#374151",
+  fontWeight: 500,
+  textDecoration: "none",
+  transition: "background 0.18s, color 0.18s",
+  background: "none",
+  position: "relative",
+};
+
+const navStyle = {
+  display: "flex",
+  justifyContent: "center",
+  gap: 12,
+  alignItems: "center",
+  background: "linear-gradient(90deg,#e0e7ff,#fff 80%)",
+  padding: "14px 0",
+  boxShadow: "0 2px 12px -8px #6787bb44",
+  borderRadius: 18,
+  margin: "18px auto 32px auto",
+  maxWidth: 900,
+};
+
 const activeStyle = {
+  background: "#2563eb33",
+  color: "#2563eb",
   fontWeight: "bold",
-  textDecoration: "underline",
-  color: "blue",
+  textDecoration: "none",
+  boxShadow: "0 2px 8px -6px #2563eb50",
 };
 
 function App() {
   return (
     <BrowserRouter>
-      <nav style={{ marginBottom: 20 }}>
-        <NavLink to="/rules" style={({ isActive }) => (isActive ? activeStyle : undefined)}>Rules Management</NavLink>{" | "}
-        <NavLink to="/transactions" style={({ isActive }) => (isActive ? activeStyle : undefined)}>Transactions</NavLink>{" | "}
-        <NavLink to="/evaluate" style={({ isActive }) => (isActive ? activeStyle : undefined)}>Evaluation</NavLink>{" | "}
-        <NavLink to="/results" style={({ isActive }) => (isActive ? activeStyle : undefined)}>Results</NavLink>
+      <nav style={navStyle}>
+        <NavLink
+          to="/rules"
+          style={({ isActive }) =>
+            isActive ? { ...linkBaseStyle, ...activeStyle } : linkBaseStyle
+          }
+        >
+          Rules Management
+        </NavLink>
+        <NavLink
+          to="/transactions"
+          style={({ isActive }) =>
+            isActive ? { ...linkBaseStyle, ...activeStyle } : linkBaseStyle
+          }
+        >
+          Transactions
+        </NavLink>
+        <NavLink
+          to="/evaluate"
+          style={({ isActive }) =>
+            isActive ? { ...linkBaseStyle, ...activeStyle } : linkBaseStyle
+          }
+        >
+          Evaluation
+        </NavLink>
+        <NavLink
+          to="/results"
+          style={({ isActive }) =>
+            isActive ? { ...linkBaseStyle, ...activeStyle } : linkBaseStyle
+          }
+        >
+          Results
+        </NavLink>
       </nav>
-
       <Routes>
         <Route path="/" element={<RulesPage />} />
         <Route path="/rules" element={<RulesPage />} />
