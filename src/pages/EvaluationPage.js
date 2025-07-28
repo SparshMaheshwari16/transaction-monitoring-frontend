@@ -29,32 +29,17 @@ export default function EvaluationPage() {
     }
 
     return (
-        <div
-            style={{
-                maxWidth: 400,
-                margin: "40px auto",
-                padding: 20,
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                borderRadius: 8,
-                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-                textAlign: "center",
-                backgroundColor: "#fff",
-            }}
-        >
-            <h2 style={{ marginBottom: 20, color: "#333" }}>Rule Evaluation</h2>
+        <div style={styles.container}>
+            <h2 style={styles.heading}>Rule Evaluation</h2>
+
             <button
                 onClick={runEvaluation}
                 disabled={loading}
                 style={{
-                    backgroundColor: loading ? "#ccc" : "#007bff",
-                    color: "white",
-                    padding: "12px 24px",
-                    border: "none",
-                    borderRadius: 4,
-                    fontSize: 16,
+                    ...styles.button,
+                    backgroundColor: loading ? "#6c757d" : "#007bff",
                     cursor: loading ? "not-allowed" : "pointer",
-                    transition: "background-color 0.3s ease",
-                    boxShadow: loading ? "none" : "0 2px 6px rgba(0,123,255,0.4)",
+                    boxShadow: loading ? "none" : "0 4px 10px rgba(0,123,255,0.45)",
                 }}
                 onMouseOver={(e) => {
                     if (!loading) e.currentTarget.style.backgroundColor = "#0056b3";
@@ -64,13 +49,14 @@ export default function EvaluationPage() {
                 }}
             >
                 {loading ? (
-                    <span style={{ display: "inline-flex", alignItems: "center" }}>
+                    <span style={styles.loadingContent}>
                         <svg
                             className="spinner"
                             width="20px"
                             height="20px"
                             viewBox="0 0 50 50"
-                            style={{ marginRight: 8 }}
+                            style={{ marginRight: 10 }}
+                            aria-label="loading spinner"
                         >
                             <circle
                                 cx="25"
@@ -99,14 +85,16 @@ export default function EvaluationPage() {
                     "Run Evaluation"
                 )}
             </button>
+
             {message && (
                 <p
                     style={{
-                        marginTop: 20,
+                        ...styles.message,
                         color: error ? "#d9534f" : "#28a745",
-                        fontWeight: "bold",
-                        fontSize: 16,
+                        backgroundColor: error ? "#f8d7da" : "#d4edda",
+                        borderColor: error ? "#f5c2c7" : "#c3e6cb",
                     }}
+                    role="alert"
                 >
                     {message}
                 </p>
@@ -114,3 +102,50 @@ export default function EvaluationPage() {
         </div>
     );
 }
+
+const styles = {
+    container: {
+        maxWidth: 440,
+        margin: "60px auto",
+        padding: 30,
+        backgroundColor: "#fff",
+        borderRadius: 12,
+        boxShadow:
+            "0 8px 16px rgba(0,0,0,0.12), 0 4px 20px rgba(0,0,0,0.08)",
+        fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+        textAlign: "center",
+    },
+    heading: {
+        marginBottom: 28,
+        color: "#2c3e50",
+        fontWeight: "600",
+        fontSize: "1.9rem",
+        letterSpacing: "0.07em",
+    },
+    button: {
+        border: "none",
+        borderRadius: 6,
+        color: "#fff",
+        fontSize: 17,
+        padding: "14px 36px",
+        fontWeight: "600",
+        userSelect: "none",
+        transition: "background-color 0.25s ease",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    loadingContent: {
+        display: "inline-flex",
+        alignItems: "center",
+    },
+    message: {
+        marginTop: 32,
+        fontWeight: 600,
+        padding: "14px 20px",
+        borderRadius: 6,
+        border: "1.8px solid",
+        userSelect: "none",
+        fontSize: 16,
+    },
+};
