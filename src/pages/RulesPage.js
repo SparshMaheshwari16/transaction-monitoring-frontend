@@ -71,13 +71,6 @@ export default function RulesPage() {
         setSortConfig({ key, direction });
     }
 
-    function renderSortIcon(column) {
-        if (sortConfig.key !== column) {
-            return " ↕";
-        }
-        return sortConfig.direction === "asc" ? " ↑" : " ↓";
-    }
-
     function sortedRules() {
         let sortableRules = [...rules];
         if (sortConfig.key) {
