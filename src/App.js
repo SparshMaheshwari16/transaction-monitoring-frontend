@@ -42,6 +42,17 @@ const activeStyle = {
 function App() {
   return (
     <BrowserRouter>
+
+      {/* Logo at the top */}
+      <div style={{ textAlign: "center", marginTop: 20 }}>
+        <img
+          src="/logo.png" // place your logo image in the public folder
+          alt="Logo"
+          style={{ height: 80, width: "auto" }}
+        />
+      </div>
+
+
       <nav style={navStyle}>
         <NavLink
           to="/rules"
