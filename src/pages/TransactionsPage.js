@@ -8,7 +8,7 @@ export default function TransactionsPage() {
 
     useEffect(() => {
         fetchTransactions();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, []);
 
     async function fetchTransactions() {
@@ -21,43 +21,10 @@ export default function TransactionsPage() {
             setTransactions(txns);
         } catch (error) {
             setError("Failed to fetch transactions.");
-            console.error(error);
+            setTransactions([]); // Defensive: show empty table
         }
         setLoading(false);
     }
-
-    if (loading)
-        return (
-            <div style={{ marginTop: 48, textAlign: "center", fontSize: 24 }}>
-                ⏳ Loading transactions...
-            </div>
-        );
-
-    if (error)
-        return (
-            <div
-                style={{
-                    margin: "38px auto",
-                    maxWidth: 500,
-                    color: "#c62828",
-                    background: "#ffdada",
-                    border: "1px solid #f3a6a6",
-                    borderRadius: 6,
-                    padding: 18,
-                    fontWeight: 500,
-                    textAlign: "center",
-                }}
-            >
-                {error}
-            </div>
-        );
-
-    if (transactions.length === 0)
-        return (
-            <div style={{ marginTop: 56, textAlign: "center", fontSize: 20 }}>
-                <b>No transactions found.</b>
-            </div>
-        );
 
     return (
         <div
@@ -81,6 +48,30 @@ export default function TransactionsPage() {
             >
                 Transactions
             </h2>
+
+            {loading && (
+                <div style={{ marginTop: 10, marginBottom: 10, textAlign: "center", fontSize: 18 }}>
+                    ⏳ Loading transactions...
+                </div>
+            )}
+
+            {error && (
+                <div
+                    style={{
+                        color: "#c62828",
+                        background: "#ffdada",
+                        border: "1px solid #f3a6a6",
+                        borderRadius: 6,
+                        padding: 12,
+                        marginBottom: 20,
+                        textAlign: "center",
+                        fontWeight: 500,
+                    }}
+                >
+                    {error}
+                </div>
+            )}
+
             <div style={{ overflowX: "auto" }}>
                 <table
                     style={{
@@ -100,61 +91,71 @@ export default function TransactionsPage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {transactions.map((txn) => (
-                            <tr key={txn.id} style={{ background: "#fff" }}>
-                                <td style={tdStyle}>
-                                    {new Date(txn.trans_time).toLocaleString()}
-                                </td>
-                                <td style={{ ...tdStyle, fontWeight: 500, color: "#00897b" }}>
-                                    ₹ {Number(txn.trans_amt).toLocaleString()}
-                                </td>
-                                <td style={tdStyle}>
-                                    <span
-                                        style={{
-                                            display: "inline-block",
-                                            borderRadius: 12,
-                                            padding: "3px 15px",
-                                            background: "#e3edfd",
-                                            color: "#2962ff",
-                                            fontWeight: 500,
-                                            fontSize: 13,
-                                        }}
-                                    >
-                                        {txn.origination}
-                                    </span>
-                                </td>
-                                <td style={tdStyle}>
-                                    <span
-                                        style={{
-                                            display: "inline-block",
-                                            borderRadius: 12,
-                                            padding: "3px 18px",
-                                            background: "#ffe3e3",
-                                            color: "#b71c1c",
-                                            fontWeight: 500,
-                                            fontSize: 13,
-                                        }}
-                                    >
-                                        {txn.nationality}
-                                    </span>
-                                </td>
-                                <td style={tdStyle}>
-                                    <span
-                                        style={{
-                                            display: "inline-block",
-                                            borderRadius: 12,
-                                            padding: "3px 16px",
-                                            background: "#fff9e3",
-                                            color: "#b26a00",
-                                            fontWeight: 500,
-                                            fontSize: 13,
-                                        }}
-                                    >
-                                        {txn.occupation}
-                                    </span>
-                                </td>
+                        {!loading && transactions.length === 0 ? (
+                            <tr>
+                                {/* <td colSpan={5} style={{ ...tdStyle, textAlign: "center", color: "#888" }}>
+                                    No transactions found.
+                                </td> */}
                             </tr>
-                        ))}
+                        ) : (
+                            transactions.map((txn) => (
+                                <tr key={txn.id}>
+                                    <td style={tdStyle}>
+                                        {txn.trans_time ? new Date(txn.trans_time).toLocaleString() : "--"}
+                                    </td>
+                                    <td style={{ ...tdStyle, fontWeight: 500, color: "#00897b" }}>
+                                        {typeof txn.trans_amt !== "undefined"
+                                            ? `₹ ${Number(txn.trans_amt).toLocaleString()}`
+                                            : "--"}
+                                    </td>
+                                    <td style={tdStyle}>
+                                        <span
+                                            style={{
+                                                display: "inline-block",
+                                                borderRadius: 12,
+                                                padding: "3px 15px",
+                                                background: "#e3edfd",
+                                                color: "#2962ff",
+                                                fontWeight: 500,
+                                                fontSize: 13,
+                                            }}
+                                        >
+                                            {txn.origination || "--"}
+                                        </span>
+                                    </td>
+                                    <td style={tdStyle}>
+                                        <span
+                                            style={{
+                                                display: "inline-block",
+                                                borderRadius: 12,
+                                                padding: "3px 18px",
+                                                background: "#ffe3e3",
+                                                color: "#b71c1c",
+                                                fontWeight: 500,
+                                                fontSize: 13,
+                                            }}
+                                        >
+                                            {txn.nationality || "--"}
+                                        </span>
+                                    </td>
+                                    <td style={tdStyle}>
+                                        <span
+                                            style={{
+                                                display: "inline-block",
+                                                borderRadius: 12,
+                                                padding: "3px 16px",
+                                                background: "#fff9e3",
+                                                color: "#b26a00",
+                                                fontWeight: 500,
+                                                fontSize: 13,
+                                            }}
+                                        >
+                                            {txn.occupation || "--"}
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>
