@@ -5,6 +5,7 @@ import RulesPage from "./pages/RulesPage";
 import TransactionsPage from "./pages/TransactionsPage";
 import EvaluationPage from "./pages/EvaluationPage";
 import ResultsPage from "./pages/ResultsPage";
+import UserTransactionsPage from "./pages/UserTransactionsPage";
 
 const linkBaseStyle = {
   padding: "10px 22px",
@@ -93,6 +94,7 @@ function App() {
         <Route path="/transactions" element={<TransactionsPage />} />
         <Route path="/evaluate" element={<EvaluationPage />} />
         <Route path="/results" element={<ResultsPage />} />
+        <Route path="/user-transactions/:userId" element={<UserTransactionsPage />} />
       </Routes>
     </BrowserRouter>
   );
