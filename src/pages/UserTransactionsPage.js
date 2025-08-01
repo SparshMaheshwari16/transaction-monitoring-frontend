@@ -88,8 +88,8 @@ export default function UserTransactionsPage() {
                                 <th style={thStyle}>Flag</th>
                                 <th style={thStyle}>Origination</th>
                                 <th style={thStyle}>Date & Time</th>
-                                <th style={thStyle}>Nationality</th>
-                                <th style={thStyle}>Occupation</th>
+                                {/* <th style={thStyle}>Nationality</th> */}
+                                {/* <th style={thStyle}>Occupation</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -108,8 +108,8 @@ export default function UserTransactionsPage() {
                                         <td style={tdStyle}>{txn.flag}</td>
                                         <td style={tdStyle}>{txn.origination}</td>
                                         <td style={tdStyle}>{txn.trans_time ? new Date(txn.trans_time).toLocaleString() : "-"}</td>
-                                        <td style={tdStyle}>{txn.nationality}</td>
-                                        <td style={tdStyle}>{txn.occupation}</td>
+                                        {/* <td style={tdStyle}>{txn.nationality}</td> */}
+                                        {/* <td style={tdStyle}>{txn.occupation}</td> */}
                                     </tr>
 
                                     {/* Expanded Rule Details Row */}
