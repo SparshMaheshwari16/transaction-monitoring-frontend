@@ -7,6 +7,7 @@ import EvaluationPage from "./pages/EvaluationPage";
 import ResultsPage from "./pages/ResultsPage";
 import UserTransactionsPage from "./pages/UserTransactionsPage";
 import CreateRulePage from "./pages/CreateRulePage";
+import CreateRulePage2 from "./pages/CreateRulePage2";
 
 
 const linkBaseStyle = {
@@ -98,6 +99,15 @@ function App() {
         >
           Create Rule
         </NavLink>
+
+        <NavLink
+          to="/rules/create/2"
+          style={({ isActive }) =>
+            isActive ? { ...linkBaseStyle, ...activeStyle } : linkBaseStyle
+          }
+        >
+          Create Rule2
+        </NavLink>
       </nav>
       <Routes>
         <Route path="/" element={<RulesPage />} />
@@ -107,6 +117,7 @@ function App() {
         <Route path="/results" element={<ResultsPage />} />
         <Route path="/user-transactions/:userId" element={<UserTransactionsPage />} />
         <Route path="/rules/create" element={<CreateRulePage />} />
+        <Route path="/rules/create/2" element={<CreateRulePage2 />} />
       </Routes>
     </BrowserRouter>
   );
