@@ -5,10 +5,11 @@ import ConditionBuilder from "../components/ConditionBuilder";
 export default function CreateRulePage2() {
     const [builtCondition, setBuiltCondition] = useState("");
     const [form, setForm] = useState({
-        name: "",
+        name: "Sample rule name",
+        condition: "Sample rule condition",
         flag_level: "Low",
-        risk_increment: "",
-        description: "",
+        risk_increment: "5",
+        description: "Sample rule description"
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
