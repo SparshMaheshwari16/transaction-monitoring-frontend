@@ -91,14 +91,14 @@ function App() {
         >
           Results
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/rules/create"
           style={({ isActive }) =>
             isActive ? { ...linkBaseStyle, ...activeStyle } : linkBaseStyle
           }
         >
           Create Rule
-        </NavLink>
+        </NavLink> */}
 
         <NavLink
           to="/rules/create/2"
